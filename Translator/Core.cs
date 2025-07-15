@@ -2,7 +2,7 @@
 using MelonLoader;
 using Translator;
 
-[assembly: MelonInfo(typeof(Core), "Translator", "0.0.4", "funlennysub")]
+[assembly: MelonInfo(typeof(Core), "Translator", "0.0.5", "funlennysub")]
 [assembly: MelonGame("Pigeons at Play", "Mycopunk")]
 
 namespace Translator;
