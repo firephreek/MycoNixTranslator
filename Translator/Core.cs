@@ -35,15 +35,22 @@ class UpgradePatch
     }
 }
 
-[HarmonyPatch(typeof(Il2Cpp.StackDisplay))]
-class StackDisplayPatch
+[HarmonyPatch(typeof(Il2CppPigeon.Movement.Player))]
+class PlayerPatch
 {
-    [HarmonyPostfix]
-    [HarmonyPatch(nameof(Il2Cpp.StackDisplay.title), MethodType.Getter)]
-    static void NamePostfix(ref string __result)
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(Il2CppPigeon.Movement.Player.UpdateStackDisplay))]
+    [HarmonyPatch(new[]
+        {
+            typeof(UnityEngine.Object), typeof(string), typeof(UnityEngine.Sprite), typeof(UnityEngine.Color),
+            typeof(int),
+            typeof(bool), typeof(float)
+        }
+    )]
+    static void Prefix(Il2CppPigeon.Movement.Player __instance, UnityEngine.Object id, ref string name,
+        UnityEngine.Sprite icon, UnityEngine.Color color, int stacks, bool updateName, float timeoutDuration)
     {
-        if (__result == null) return;
-        __result = __result.Replace("<font=H>", "").Replace("</font>", "");
+        name = name.Replace("<font=H>", "").Replace("</font>", "");
     }
 }
 
