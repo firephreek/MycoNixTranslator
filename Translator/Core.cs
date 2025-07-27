@@ -7,11 +7,11 @@ using Translator;
 
 namespace Translator;
 
-[HarmonyPatch(typeof(Il2Cpp.Upgrade))]
+[HarmonyPatch(typeof(Upgrade))]
 class UpgradePatch
 {
     [HarmonyPostfix]
-    [HarmonyPatch(nameof(Il2Cpp.Upgrade.Name), MethodType.Getter)]
+    [HarmonyPatch(nameof(Upgrade.Name), MethodType.Getter)]
     static void NamePostfix(ref string __result)
     {
         if (__result == null) return;
@@ -19,7 +19,7 @@ class UpgradePatch
     }
 
     [HarmonyPostfix]
-    [HarmonyPatch(nameof(Il2Cpp.Upgrade.Description), MethodType.Getter)]
+    [HarmonyPatch(nameof(Upgrade.Description), MethodType.Getter)]
     static void DescriptionPostfix(ref string __result)
     {
         if (__result == null) return;
@@ -27,7 +27,7 @@ class UpgradePatch
     }
 
     [HarmonyPostfix]
-    [HarmonyPatch(nameof(Il2Cpp.Upgrade.GetStatList))]
+    [HarmonyPatch(nameof(Upgrade.GetStatList))]
     static void StatListPostfix(int seed, ref string __result)
     {
         if (__result == null) return;
@@ -35,11 +35,11 @@ class UpgradePatch
     }
 }
 
-[HarmonyPatch(typeof(Il2CppPigeon.Movement.Player))]
+[HarmonyPatch(typeof(Pigeon.Movement.Player))]
 class PlayerPatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch(nameof(Il2CppPigeon.Movement.Player.UpdateStackDisplay))]
+    [HarmonyPatch(nameof(Pigeon.Movement.Player.UpdateStackDisplay))]
     [HarmonyPatch(new[]
         {
             typeof(UnityEngine.Object), typeof(string), typeof(UnityEngine.Sprite), typeof(UnityEngine.Color),
@@ -47,7 +47,7 @@ class PlayerPatch
             typeof(bool), typeof(float)
         }
     )]
-    static void Prefix(Il2CppPigeon.Movement.Player __instance, UnityEngine.Object id, ref string name,
+    static void Prefix(Pigeon.Movement.Player __instance, UnityEngine.Object id, ref string name,
         UnityEngine.Sprite icon, UnityEngine.Color color, int stacks, bool updateName, float timeoutDuration)
     {
         name = name.Replace("<font=H>", "").Replace("</font>", "");
